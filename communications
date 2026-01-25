@@ -1,0 +1,38 @@
+Setec/BMPRO System Decoder (Master List)
+1. The Header Decoder (First 8 Hex Characters)
+The header tells you Type, Target, and Topic.
+Format: [Type (2)] [Fixed (2)] [Target ID (2)] [Register (2)]
+
+A. Message Types (First Byte)
+
+Hex Prefix Meaning Usage
+0x38 Update / Status Broadcasts state (e.g., Battery SOC, Tank Levels).
+0x3C Query (Get) Asking a device for info (e.g., "Get Voltage").
+0x34 Command (Set) High Priority. Used for Pump Switches (Trek2 style).
+0x3E Command (Set) Standard Control (e.g., Console Unlock).
+0x18 Direct Force Hardware override (Bypasses logic).
+
+B. Device IDs (Target Device)
+Hidden in the middle bytes (e.g., ...90...).
+
+Hex ID Decimal Device Name Role
+0x90 36 CN101 The Brain. Controls Logic, Tanks, App.
+0x40 16 BP35 The Power Unit. Relays, Fuses.
+0x80 32 Trek2 Wall Touchscreen.
+0x50 20 J35 Older Power Unit.
+0xA0 40 Ble2Can Bluetooth Bridge (if separate).
+0x00 0 Broadcast "
+
+2. The Register Map (The "Topic")
+The last byte of the header (e.g., ...83).
+
+Register (Hex) Name Payload Format (Data Bytes)
+0x83 BATTERY_SOC [State, SOC%, TimeHi, TimeLo, VoltsHi, VoltsLo]
+0x80 TANK_LEVELS [Tank1, Tank2, Tank3, Tank4] (Values 0-100)
+0x62 SYS_VOLTAGE [ValHi, ValLo] (Divide by 1000 for Volts)
+0x13 SWITCH_CMD [Index, ValHi, ValLo] (Pump/Light Switches)
+0x03 CONSOLE_LOCK [SourceHi, SourceLo, 01=Open]
+0x6F PUMP_LOGIC [ControlNum, Interval...] (Logic driven)
+0x40 - 0x5F OUTPUT_1-32 [0xFF] (On) or [0x00] (Off)
+
+
