@@ -1,15 +1,30 @@
-BP35	      16	    0x10	  Power Management Unit (PMU). Controls physical relays (Pumps, Lights), manages battery charging, and reports voltage.
-OutputMgr	  16	            The Switchboard. Manages the physical relays (Pumps, Lights). It processes the 3c... commands you send to Registers 110/111 (0x6E/0x6F).
-ExtSource	  16	          	Power Monitor. Logic that specifically watches Solar/Aux inputs separate from the main battery.
-CN101	      36	    0x24	  System Controller (Gateway). The "Brain." Stores logic for tanks, timers, and manages the Console lockout.
-TankSensors	36	        	  Fluid Monitor. Converts raw resistance from the tank probes into percentage values.
-TempSensor	36	        	  Thermometer. (New Finding) A previously unseen capability to read ambient/battery temperature.
-Uploader    36	          	OTA Manager. Handles firmware updates for devices on the bus.
-Ble2Can	    40	    0x28	  Bluetooth Bridge. The interface you connect to. It filters traffic and enforces the "Lockout" state.
-Trek2	      32	    0x20	  Wall Display. The touch screen unit. It reads telemetry and sends user commands.
-J35	        20	    0x14	  A different model of Battery Management System (PMU).
-DCX	        18	    0x12	  DC-DC Charger (likely for solar/vehicle inputs).
-RVView	    44	    0x2C	  Advanced Monitoring Display.
+Node Name       CAN ID  BLE ID  Description
+BP35            0x40	  0x10	  Power Management Unit (PMU). Controls physical relays (Pumps, Lights), manages battery charging, and reports voltage.
+DCX	            0x40    0x12	  Power Management Unit (PMU). Controls physical relays (Pumps, Lights), and reports voltage. (NO 240V)
+J35	            0x40	  0x14	  Power Management Unit (PMU). Controls physical relays (Pumps, Lights), manages battery charging, and reports voltage.
+Voltage Sensor	0x62    0x10    Main Battery Voltage (e.g., 12.6V)
+Current Sensor	0x61    0x10		Amps In/Out (e.g., -2.5A)
+Capacity Sensor	0x6A    0x10		Ah Remaining (e.g., 82Ah)
+SoC Sensor	    0x66    0x10		State of Charge % (e.g., 57%)
+Temp Sensor	    0x67    0x10		Battery Temperature
+AC Mains	      0x68    0x10		Shore Power Status (On/Off)
+Switch Bank	    0x40    0x10		Status of Pumps, Lights, Aux
+
+OutputMgr	      16	            The Switchboard. Manages the physical relays (Pumps, Lights). It processes the 3c... commands you send to Registers 110/111 (0x6E/0x6F).
+ExtSource	      16	          	Power Monitor. Logic that specifically watches Solar/Aux inputs separate from the main battery.
+
+CN103           0x20    0x24	  System Controller (Gateway).
+Tank Sender	    0x83    0x24		Water Levels (1-4)
+
+TempSensor	    36	        	  Thermometer. (New Finding) A previously unseen capability to read ambient/battery temperature.
+Uploader        36	          	OTA Manager. Handles firmware updates for devices on the bus.
+Ble2Can	        0x20	  0x28	  Bluetooth Bridge. The interface you connect to. It filters traffic and enforces the "Lockout" state.
+
+Trek2	          0x90	  0x20	  Wall Display. The touch screen unit. It reads telemetry and sends user commands.
+RVView	        0x90	  0x2C	  Advanced Monitoring Display.
+
+SmartLink	      0x80	  0x30	  Wireless Hub. Older generic gateway ID.
+
 BC300      	128	    0x80	  Dedicated Battery Monitor / Shunt.
 CanAP	      16384	  0x4000	CAN Access Point (Wi-Fi Bridge?).
 Generic	    16400	  0x4010	Fallback device type for unknown hardware.
