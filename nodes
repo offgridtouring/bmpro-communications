@@ -10,11 +10,25 @@ Temp Sensor	    0x67    0x10		Battery Temperature
 AC Mains	      0x68    0x10		Shore Power Status (On/Off)
 Switch Bank	    0x40    0x10		Status of Pumps, Lights, Aux
 
+Battery Voltage	62	Bytes 2 & 3	(Value) / 1000
+Battery Amps	61	Bytes 2 & 3	(Value) / 10 (Signed Int)
+Water Tank 1	18009083	Byte 4 (Index 01)	((raw - 65) / 185) * 100
+Water Tank 2	18009083	Byte 4 (Index 02)	((raw - 65) / 185) * 100
+Pump 1 Load	42	Byte 4	00 = Off / >0 = Amps
+Pump 2 Load	4D	Byte 4	00 = Off / >0 = Amps
+Light Zone 1	49	01	00	1-Byte
+Light Zone 2	4A	01	00	1-Byte
+Light Zone 3	4B	01	00	1-Byte
+Water Pump 1	4C	0100	0000	2-Byte
+Water Pump 2	4D	0100	0000	2-Byte
+
 OutputMgr	      16	            The Switchboard. Manages the physical relays (Pumps, Lights). It processes the 3c... commands you send to Registers 110/111 (0x6E/0x6F).
 ExtSource	      16	          	Power Monitor. Logic that specifically watches Solar/Aux inputs separate from the main battery.
 
 CN103           0x20    0x24	  System Controller (Gateway).
 Tank Sender	    0x83    0x24		Water Levels (1-4)
+Slide Out	4E	01	00	Momentary*
+Slide In	4F	01	00	Momentary*
 
 TempSensor	    36	        	  Thermometer. (New Finding) A previously unseen capability to read ambient/battery temperature.
 Uploader        36	          	OTA Manager. Handles firmware updates for devices on the bus.
@@ -32,3 +46,6 @@ RVView      44      0x2C    Monitor Display. An older style LCD status panel.
 AC Charger  8       0x08    Mains Charger. A standalone 240V charger node (if not built into the BP35).
 Solar Reg   4       0x04    MPPT Regulator. Standalone solar controller node.
 Inv         12      0x0C    Inverter. 12V to 240V inverter status node. 
+
+
+
