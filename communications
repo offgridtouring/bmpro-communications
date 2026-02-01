@@ -17,12 +17,10 @@ Hex Prefix Meaning Usage
 B. Device IDs (Target Device)
 Hidden in the middle bytes (e.g., ...90...).
 
-Hex ID Decimal Device Name Role
-0x90 36 CN101 The Brain. Controls Logic, Tanks, App.
-0x40 16 BP35 The Power Unit. Relays, Fuses.
-0x80 32 Trek2 Wall Touchscreen.
-0x50 20 J35 Older Power Unit.
-0xA0 40 Ble2Can Bluetooth Bridge (if separate).
+Hex Decimal Device Name Role
+0x90 CN101 The Brain. Controls Logic, Tanks, App.
+0x40 BP35 The Power Unit. Relays, Fuses.
+0x80 Trek2 Wall Touchscreen.
 0x00 0 Broadcast "
 
 2. The Register Map (The "Topic")
