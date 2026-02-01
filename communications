@@ -6,11 +6,13 @@ Format: [Type (2)] [Fixed (2)] [Target ID (2)] [Register (2)]
 A. Message Types (First Byte)
 
 Hex Prefix Meaning Usage
-0x38 Update / Status Broadcasts state (e.g., Battery SOC, Tank Levels).
-0x3C Query (Get) Asking a device for info (e.g., "Get Voltage").
-0x34 Command (Set) High Priority. Used for Pump Switches (Trek2 style).
-0x3E Command (Set) Standard Control (e.g., Console Unlock).
-0x18 Direct Force Hardware override (Bypasses logic).
+
+0x18 State (Status) Broadcasts state (e.g., Battery SOC, Tank Levels).
+0x1E Command (Set) Used for Pump Switches (Trek2 style).
+0x16 CMD confirmation
+0x1C Query (Get) Asking a device for info e.g., "Get Voltage".
+0x14 Data (Response) Answering with device info e.g., "14.4v".
+
 
 B. Device IDs (Target Device)
 Hidden in the middle bytes (e.g., ...90...).
