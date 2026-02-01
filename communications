@@ -6,12 +6,13 @@ Format: [Type (2)] [Fixed (2)] [Target ID (2)] [Register (2)]
 A. Message Types (First Byte)
 
 Hex Prefix Meaning Usage
-
+0x00 Heatbeat
 0x18 State (Status) Broadcasts state (e.g., Battery SOC, Tank Levels).
-0x1E Command (Set) Used for Pump Switches (Trek2 style).
-0x16 CMD confirmation
+0x1E Command (Set) Used for Pump, Switches.
+0x16 Confirmation
 0x1C Query (Get) Asking a device for info e.g., "Get Voltage".
 0x14 Data (Response) Answering with device info e.g., "14.4v".
+0x1D Rollcall ( ) "Whose on the bus" 
 
 
 B. Device IDs (Target Device)
