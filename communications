@@ -7,6 +7,7 @@ A. Message Types (First Byte)
 
 Hex Prefix Meaning Usage
 0x00 Heatbeat
+0x03 ???
 0x18 State (Status) Broadcasts state (e.g., Battery SOC, Tank Levels).
 0x1E Command (Set) Used for Pump, Switches.
 0x16 Confirmation
@@ -27,13 +28,59 @@ Hex Decimal Device Name Role
 2. The Register Map (The "Topic")
 The last byte of the header (e.g., ...83).
 
-Register (Hex) Name Payload Format (Data Bytes)
-0x83 BATTERY_SOC [State, SOC%, TimeHi, TimeLo, VoltsHi, VoltsLo]
-0x80 TANK_LEVELS [Tank1, Tank2, Tank3, Tank4] (Values 0-100)
-0x62 SYS_VOLTAGE [ValHi, ValLo] (Divide by 1000 for Volts)
-0x13 SWITCH_CMD [Index, ValHi, ValLo] (Pump/Light Switches)
-0x03 CONSOLE_LOCK [SourceHi, SourceLo, 01=Open]
-0x6F PUMP_LOGIC [ControlNum, Interval...] (Logic driven)
-0x40 - 0x5F OUTPUT_1-32 [0xFF] (On) or [0x00] (Off)
-
+Hex Name Payload Format (Data Bytes)
+0x01
+0x0F
+0x10
+0x11
+0x13
+0x38 
+0x40
+0x41
+0x42
+0x43
+0x44
+0x45
+0x46
+0x47
+0x48
+0x49 Lights 1
+0x4A Lights 2
+0x4B Lights 3
+0x4C Pump 1
+0x4D Pump 2
+0x4E
+0x4F
+0x50
+0x51
+0x52
+0x53
+0x54
+0x55
+0x56
+0x57
+0x58
+0x59
+0x5A
+0x5B
+0x5C
+0x5D
+0x5E
+0x5F
+0x60
+0x61 Battery Current (Signed mA (Negative = Discharge))
+0x62 Battery Voltage (mV (e.g., 13544 = 13.54V))
+0x63 ???
+0x64 ???
+0x65 ???
+0x66 State of Charge (% (0-100))
+0x67 (possible ac charge) (total current)
+0x68
+0x69 Charge Mode [00 20 idle - 00 22 aux <12v - 00 24 aux >13v - 00 38 - solar] 
+0x6A Battery Capacity [00 04 93 E0 300ah - 00 03 D0 90 250ah - 00 03 0D 40 200ah] (Big Endian)
+0x6B Aux Voltage (mV (e.g., 13544 = 13.54V))
+0x6C Solar Current (Signed mA (Negative = Discharge))
+0x6D (possible runtime)
+0x6E
+0x6F
 
