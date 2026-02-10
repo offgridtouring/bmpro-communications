@@ -39,7 +39,7 @@ Hex Name Payload Format (Data Bytes)
 0x41
 0x42
 0x43
-0x44
+0x44 ???
 0x45
 0x46
 0x47
@@ -80,9 +80,9 @@ Hex Name Payload Format (Data Bytes)
 0x6A Battery Capacity [00 04 93 E0 300ah - 00 03 D0 90 250ah - 00 03 0D 40 200ah] (Big Endian)
 0x6B Aux Voltage (mV (e.g., 13544 = 13.54V))
 0x6C Solar Current (Signed mA (Negative = Discharge))
-0x6D (possible runtime)
+0x6D ???
 0x6E
 0x6F
-0x70
+0x70 ???
 0x80 Tanks [4 = 00 ** ** **, 3 = ** 00 ** **, 2 = ** ** 00 **, 1 = ** ** ** 00] (01 = 0-25%, 02 = 25-50%, 03 = 50-75%, 04 = 75-100%) 
 0x83
