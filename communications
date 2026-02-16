@@ -29,14 +29,15 @@ Hex Decimal Device Name Role
 The last byte of the header (e.g., ...83).
 
 Hex Name Payload Format (Data Bytes)
-0x01
+0x00 Version
+0x01 System date
 0x0F
 0x10
 0x11
 0x13
 0x38 
-0x40
-0x41
+0x40 Slide out
+0x41 Slide out
 0x42
 0x43
 0x44 ???
@@ -85,4 +86,4 @@ Hex Name Payload Format (Data Bytes)
 0x6F
 0x70 ???
 0x80 Tanks [4 = 00 ** ** **, 3 = ** 00 ** **, 2 = ** ** 00 **, 1 = ** ** ** 00] (01 = 0%, 02 = 25%, 03 = 50%, 04 = 75%, 05 = 100%) 
-0x83
+0x83 Temp
