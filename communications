@@ -76,7 +76,7 @@ Hex Name Payload Format (Data Bytes)
 0x66 State of Charge (% (0-100))
 0x67 (possible ac charge) (total current)
 0x68
-0x69 Charge Mode [00 20 idle - 00 22 aux <12v - 00 24 aux >13v - 00 38 - solar] 
+0x69 Charge Mode/Load Switch [00 ** - Off, 02 ** - On, ** 20 idle - ** 22 aux <12v - ** 24 aux >13v - ** 38 - solar] 
 0x6A Battery Capacity [00 04 93 E0 300ah - 00 03 D0 90 250ah - 00 03 0D 40 200ah] (Big Endian)
 0x6B Aux Voltage (mV (e.g., 13544 = 13.54V))
 0x6C Solar Current (Signed mA (Negative = Discharge))
