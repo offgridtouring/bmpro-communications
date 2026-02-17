@@ -7,7 +7,6 @@ A. Message Types (First Byte)
 
 Hex Prefix Meaning Usage
 0x00 Heatbeat
-0x03 ???
 0x18 State (Status) Broadcasts state (e.g., Battery SOC, Tank Levels).
 0x1E Command (Set) Used for Pump, Switches.
 0x16 Confirmation
@@ -31,59 +30,38 @@ The last byte of the header (e.g., ...83).
 Hex Name Payload Format (Data Bytes)
 0x00 Version
 0x01 System date
-0x0F
-0x10
-0x11
-0x13
-0x38 
-0x40 Slide out
-0x41 Slide out
-0x42
-0x43
-0x44 ???
-0x45
-0x46
-0x47
-0x48
-0x49 Lights 1
-0x4A Lights 2
-0x4B Lights 3
-0x4C Pump 1
-0x4D Pump 2
-0x4E
-0x4F
-0x50
-0x51
-0x52
-0x53
-0x54
-0x55
-0x56
-0x57
-0x58
-0x59
-0x5A
-0x5B
-0x5C
-0x5D
-0x5E
-0x5F
-0x60
+
+0x40 (01) Output
+0x41 (02) Output
+0x42 (03) Output
+0x43 (04) Output
+0x44 (05) Output
+0x45 (06) Output
+0x46 (07) Output
+0x47 (08) Output 
+0x48 (09) Output 
+0x49 (10) Lights 1
+0x4A (11) Lights 2
+0x4B (12) Lights 3
+0x4C (13) Pump 1
+0x4D (14) Pump 2
+
 0x61 Battery Current (Signed mA (Negative = Discharge))
 0x62 Battery Voltage (mV (e.g., 13544 = 13.54V))
-0x63 ???
-0x64 ???
-0x65 ???
+0x63 Solar Voltage Out
+0x64 Solar Current Out
+0x65 Solar Yield Daily
 0x66 State of Charge (% (0-100))
 0x67 (possible ac charge) (total current)
-0x68
+0x68 ???
 0x69 Charge Mode/Load Switch [00 ** - Off, 02 ** - On, ** 20 idle - ** 22 aux <12v - ** 24 aux >13v - ** 38 - solar] 
 0x6A Battery Capacity [00 04 93 E0 300ah - 00 03 D0 90 250ah - 00 03 0D 40 200ah] (Big Endian)
 0x6B Aux Voltage (mV (e.g., 13544 = 13.54V))
-0x6C Solar Current (Signed mA (Negative = Discharge))
+0x6C Solar/Aux Current (Signed mA (Negative = Discharge))
 0x6D ???
-0x6E
-0x6F
+0x6E Is being broadcast constantly to keep the "Pairing" alive between the tablet and the power board.
+0x6F System Timer Internal clock/uptime
+
 0x70 ???
 0x80 Tanks [4 = 00 ** ** **, 3 = ** 00 ** **, 2 = ** ** 00 **, 1 = ** ** ** 00] (01 = 0%, 02 = 25%, 03 = 50%, 04 = 75%, 05 = 100%) 
 0x83 Temp
