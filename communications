@@ -14,8 +14,14 @@ Hex Prefix Meaning Usage
 0x14 Data (Response) Answering with device info e.g., "14.4v".
 0x1D Rollcall ( ) "Whose on the bus" 
 
+B. Device IDs (Fixed Device)
+Hidden in the middle bytes (e.g., ..20....).
 
-B. Device IDs (Target Device)
+Hex Decimal Device Name Role
+0x20 BC300 External Shunt. Voltage Current Battery and Outside Temp
+
+
+C. Device IDs (Target Device)
 Hidden in the middle bytes (e.g., ...90...).
 
 Hex Decimal Device Name Role
@@ -25,7 +31,7 @@ Hex Decimal Device Name Role
 0x80 Trek2 Wall Touchscreen.
 0x00 0 Broadcast "
 
-2. The Register Map (The "Topic")
+D. The Register Map (The "Topic")
 The last byte of the header (e.g., ...83).
 
 Hex Name Payload Format (Data Bytes)
@@ -67,3 +73,9 @@ Hex Name Payload Format (Data Bytes)
 0x80 Tanks [4 = 00 ** ** **, 3 = ** 00 ** **, 2 = ** ** 00 **, 1 = ** ** ** 00] (01 = 0%, 02 = 25%, 03 = 50%, 04 = 75%, 05 = 100%) 
 0x81 Slideout [Down 02 2C 01 00 00, In 03 2C 01 00 00
 0x83 Temp [01 ** ** ** Ext Temp, 02 ** ** ** Int Temp] (need to find out what NTC to use.
+
+shunt example
+18020062 62 00 00 37 8E 14222 14.22 V Battery Voltage (mV)
+18020061 61 00 00 05 F8 1528 1.52 A Battery Current (Signed mA)
+18020083 83 01 00 00 71 48 29000 29.0 °C Ext Temp (Index 01)
+18020083 83 02 00 00 61 A8 25000 25.0 °C Int Temp (Index 02)
