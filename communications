@@ -38,6 +38,9 @@ Hex Name Payload Format (Data Bytes)
 0x00 Version
 0x01 System date
 
+0xA0 Consumed Amp-Hours? (bc300)
+0x14 Status Flag? (bc300 continually counts up)
+
 0x40 (01) Output
 0x41 (02) Output
 0x42 (03) Output
