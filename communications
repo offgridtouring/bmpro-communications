@@ -64,7 +64,7 @@ Hex Name Payload Format (Data Bytes)
 0x66 State of Charge (% (0-100))
 0x67 (possible ac charge) (total current)
 0x68 ???
-0x69 Charge Mode/Load Switch [02 ** - Off, 00 ** - On, ** 20 idle - ** 22 aux <12v - ** 24 aux >13v - ** 38 - solar] 
+0x69 Charge Mode/Load Switch [02 ** - Off, 00 ** - On | ** 20  - idle, ** 22 - aux <12v, ** 24 - aux >13v, ** 38 - solar, ** 40 - LVD Lead-Acid 10.5V, ** 80 - LVD Lithium 12v] 
 0x6A Battery Capacity [00 04 93 E0 300ah - 00 03 D0 90 250ah - 00 03 0D 40 200ah] (Big Endian)
 0x6B Aux Voltage (mV (e.g., 13544 = 13.54V))
 0x6C Solar/Aux Current (Signed mA (Negative = Discharge))
@@ -72,7 +72,7 @@ Hex Name Payload Format (Data Bytes)
 0x6E Is being broadcast constantly to keep the "Pairing" alive between the tablet and the power board.
 0x6F System Timer Internal clock/uptime
 
-0x70 ???
+0x70 System Health / Error Code [0A - System Normal]
 0x80 Tanks [4 = 00 ** ** **, 3 = ** 00 ** **, 2 = ** ** 00 **, 1 = ** ** ** 00] (01 = 0%, 02 = 25%, 03 = 50%, 04 = 75%, 05 = 100%) 
 0x81 Slideout [Down 02 2C 01 00 00, In 03 2C 01 00 00
 0x83 Temp [01 ** ** ** Ext Temp, 02 ** ** ** Int Temp] (need to find out what NTC to use.
