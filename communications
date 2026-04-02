@@ -12,7 +12,7 @@ Hex Prefix Meaning Usage
 0x16 Confirmation
 0x1C Query (Get) Asking a device for info e.g., "Get Voltage".
 0x14 Data (Response) Answering with device info e.g., "14.4v".
-0x1D Rollcall ( ) "Whose on the bus" 
+0x1D Rollcall ( ) "Whose on the bus" e.g. 1DFFFC00
 
 B. Device IDs (Fixed Device)
 Hidden in the middle bytes (e.g., ..20....).
@@ -35,7 +35,7 @@ D. The Register Map (The "Topic")
 The last byte of the header (e.g., ...83).
 
 Hex Name Payload Format (Data Bytes)
-0x00 Version
+0x00 Version - (CN101 41 12 61 32 37 00 11 / BP35 41 81 05 31 35 10 71
 0x01 System date
 
 0xA0 Consumed Amp-Hours? (bc300)
