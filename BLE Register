@@ -1,28 +1,38 @@
 ## 1. Core System Registers (BP35 / Node)
 These registers are used to pull raw data or trigger physical relays on the main power board.
-  BLE Reg (Hex)   Dec   Name               Description / Payload  
-  0x61            97    Battery Current    Signed Int16 (mA). Negative = Discharge.
-  0x62            98    Battery Voltage    Uint16 (mV). e.g., 12800 = 12.8V.
-  0x63            99    Solar Voltage      Input voltage from the panels.
-  0x64            100   Solar Current      Charging current from solar (mA).
-  0x66            102   State of Charge    0–100 (%).
-  0x70            112   System Health      Status codes (0x0A = Normal).
-  0x6B            107   Aux Voltage        Voltage from the Anderson/Car plug.
+BLE Reg (Hex),Dec,Name,Description / Payload
+0x61,97,Battery Current,Signed Int16 (mA). Negative = Discharge.
+0x62,98,Battery Voltage,Uint16 (mV). Current reading: ~13.16V.
+0x63,99,Solar Voltage,Input voltage from the MPPT controller.
+0x64,100,Solar Current,Charging current from solar panels (mA).
+0x66,102,State of Charge,Battery percentage (0–100%).
+0x67,103,Charge Power,[NEW] Internal charger effort/AC charge (Watts/mA).
+0x6A,106,Battery Capacity,Uint32 (mAh). Your system is set to 300Ah.
+0x6B,107,Aux/Car Voltage,Anderson Plug input. 0.20V = Disconnected/Off.
+0x6C,108,Total Load,[NEW] Total system consumption (mA). Always positive.
+0x70,112,System Health,"Status. 0x0A = Normal, 0x01 = Fault."
 
 ## 2. Control & Switch Registers
 To use these, your msg_type in the script should be 6 (Command/Set).
-  BLE Reg (Hex)    Dec  Target    Function        Payload
-  0x03             3    CN101     Console Unlock  [0x40, 0x10, 0x01] (Wakes bridge)
-  0x49             73   BP35      Light 1         [0xFF] = ON, [0x00] = OFF
-  0x4A             74   BP35      Light 2         [0xFF] = ON, [0x00] = OFF
-  0x4C             76   BP35      Pump 1          [0x01] = ON, [0x00] = OFF
-  0x81             129  BP35      Slideout        [0x02...] = Extend, [0x03...] = Retract
+BLE Reg (Hex),Dec,Name,Payload Status Code Meaning
+0x40 - 0x48,64-72,Generic Outputs,"00=Off, 15=Standby, 2A=Fault/Parasitic."
+0x49,73,Light 1,Relay status for Light Circuit 1.
+0x4A,74,Light 2,Relay status for Light Circuit 2.
+0x4B,75,Light 3,Relay status for Light Circuit 3.
+0x4C,76,Pump 1,Water Pump 1 Relay.
+0x4D,77,Pump 2,Water Pump 2 Relay (if equipped).
 
 ## 3. Tank & Environment Registers
 These are usually broadcast as notifications once the bridge is "poked."
-  BLE Reg (Hex)    Dec  Name         Payload Key
-  0x80             128  Water Tanks  4-byte array. Each byte is a tank level (1–5 scale).
-  0x83             131  Temperature  Byte 1: Index (1=Ext, 2=Int). Bytes 3-4: Temp in mC.
-  0x6F             111  Uptime       System timer/clock synchronization.
+BLE Reg (Hex),Dec,Name,Description / Payload
+0x03,3,Console Unlock,"[0x40, 0x10, 0x01] - Required to start BLE stream."
+0x80,128,Water Tanks,"4-byte array. 05 = 100%, 01 = 0%."
+0x83,131,Temperature,"Byte 1: Index (1=Ext, 2=Int). Byte 5-6: Temp in mC."
+0x00,0,Version Info,"Firmware string (e.g., 41 12 61 32 37)."
 
-  ## 4. The "Hidden" Shunt Registers (BC300)If you have a BC300 External Shunt, it has its own ID in the system but uses the same register logic.Target ID: 8 (Derived from CAN 0x20 $\rightarrow$ 0x20 >> 2 = 8)0x61 (97): High-precision Shunt Current.0xA0 (160): Consumed Amp-Hours (Used for accurate SoC tracking).
+## 4. The "Hidden" Shunt Registers (BC300)
+If you have a BC300 External Shunt, it has its own ID in the system but uses the same register logic.
+Target ID,BLE Reg (Hex),Name,Description
+25116,0x1CE,Bridge HB,[NEW] BLE Gateway / Wi-Fi heartbeat broadcast.
+16,0x69,Charge Mode,Current charging profile (Bulk/Float/LVD).
+16,0x6F,System Timer,Internal uptime clock.
