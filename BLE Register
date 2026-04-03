@@ -1,0 +1,28 @@
+## 1. Core System Registers (BP35 / Node)
+These registers are used to pull raw data or trigger physical relays on the main power board.
+  BLE Reg (Hex)   Dec   Name               Description / Payload  
+  0x61            97    Battery Current    Signed Int16 (mA). Negative = Discharge.
+  0x62            98    Battery Voltage    Uint16 (mV). e.g., 12800 = 12.8V.
+  0x63            99    Solar Voltage      Input voltage from the panels.
+  0x64            100   Solar Current      Charging current from solar (mA).
+  0x66            102   State of Charge    0–100 (%).
+  0x70            112   System Health      Status codes (0x0A = Normal).
+  0x6B            107   Aux Voltage        Voltage from the Anderson/Car plug.
+
+## 2. Control & Switch Registers
+To use these, your msg_type in the script should be 6 (Command/Set).
+  BLE Reg (Hex)    Dec  Target    Function        Payload
+  0x03             3    CN101     Console Unlock  [0x40, 0x10, 0x01] (Wakes bridge)
+  0x49             73   BP35      Light 1         [0xFF] = ON, [0x00] = OFF
+  0x4A             74   BP35      Light 2         [0xFF] = ON, [0x00] = OFF
+  0x4C             76   BP35      Pump 1          [0x01] = ON, [0x00] = OFF
+  0x81             129  BP35      Slideout        [0x02...] = Extend, [0x03...] = Retract
+
+## 3. Tank & Environment Registers
+These are usually broadcast as notifications once the bridge is "poked."
+  BLE Reg (Hex)    Dec  Name         Payload Key
+  0x80             128  Water Tanks  4-byte array. Each byte is a tank level (1–5 scale).
+  0x83             131  Temperature  Byte 1: Index (1=Ext, 2=Int). Bytes 3-4: Temp in mC.
+  0x6F             111  Uptime       System timer/clock synchronization.
+
+  ## 4. The "Hidden" Shunt Registers (BC300)If you have a BC300 External Shunt, it has its own ID in the system but uses the same register logic.Target ID: 8 (Derived from CAN 0x20 $\rightarrow$ 0x20 >> 2 = 8)0x61 (97): High-precision Shunt Current.0xA0 (160): Consumed Amp-Hours (Used for accurate SoC tracking).
