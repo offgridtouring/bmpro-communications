@@ -28,6 +28,7 @@ Hex Decimal Device Name Role
 0x90 CN101 The Brain. Controls Logic, Tanks, App.
 0x94 OD105 The Brain. Controls Logic, Tanks, App.
 0x40 BP35 The Power Unit. Relays, Fuses.
+0x50 J35 The Power Unit. Relays, Fuses.
 0x80 Trek2 Wall Touchscreen.
 0x00 0 Broadcast "
 
