@@ -26,7 +26,7 @@ Hidden in the middle bytes (e.g., ...90...).
 
 Hex Decimal Device Name Role
 0x4* BP35 The Power Unit. Relays, Fuses.
-0x5* J35 The Power Unit. Relays, Fuses.
+0x5* J35/ASPOWER The Power Unit. Relays, Fuses.
 0x8* Trek2 Wall Touchscreen.
 0x9* ControlNode/OdyesseyLink The Brain. Controls Logic, Tanks, App.
 0x00 0 Broadcast "
